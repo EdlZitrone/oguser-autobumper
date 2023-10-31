@@ -68,7 +68,6 @@ class Autobumper:
             newreply_xpath = '//*[@id="noa-posttransition"]/div[2]/div/div/a'
             element = self.wait.until(ec.visibility_of_element_located((By.XPATH, newreply_xpath)))
             reply_link = element.get_attribute('href')
-            print(reply_link)
             links.append(reply_link)
         return links
 
