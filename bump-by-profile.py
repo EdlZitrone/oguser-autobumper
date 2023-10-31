@@ -8,7 +8,6 @@ from config import username, password
 # pip install selenium==4.12.0
 # pip install undetected-chromedriver
 
-
 class Autobumper:
 
     def __init__(self, user, passw):
