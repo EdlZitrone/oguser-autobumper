@@ -10,15 +10,15 @@ from config import username, password
 
 class Autobumper:
 
-    def __init__(self, user, passw):
+    def __init__(self):
         options = uc.ChromeOptions()
         options.add_argument("--window-size=920,600")
         self.driver = uc.Chrome(use_subprocess=True, options=options)
         self.wait = WebDriverWait(self.driver, 40)
         self.main_url = "https://flipd.gg/"
-        self.username = user
+        self.username = username
 
-        self.login(user, passw)
+        self.login(username, password)
         self.bumper()
 
     # loop to keep bumping all the threads as long as user is logged in
@@ -26,7 +26,7 @@ class Autobumper:
         while True:
             links = self.get_links()
             self.bump_threads(links)
-            time.sleep(1800 - len(links) * 7)
+            time.sleep(1800 - len(links)*7)
 
     # try to log in to the website with given user credentials
     def login(self, username, password):
@@ -51,10 +51,12 @@ class Autobumper:
 
     # get list of active shop threads for logged in user
     def get_threads(self) -> list:
+        self.driver.get(self.main_url + self.username)
+        elements = self.driver.find_elements(By.CLASS_NAME, 'shop_background')
         links = []
-        with open('threads.txt') as file:
-            for line in file:
-                links.append(line)
+        for e in elements:
+            link_element = e.find_element(By.CSS_SELECTOR, 'a')
+            links.append(link_element.get_attribute('href'))
         return links
 
     # get list of newreply links with given thread link list
@@ -94,6 +96,3 @@ class Autobumper:
         self.wait.until(ec.element_to_be_clickable((By.XPATH, button_xpath))).click()
         print('Bumped: ' + title)
         time.sleep(7)
-
-
-Autobumper(username, password)
