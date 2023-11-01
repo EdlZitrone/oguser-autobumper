@@ -7,8 +7,8 @@
 ## Setup:
 
 ### Requirements
-You need Python 3.10 or a newer Version do run your code.  
-Make sure you have the newest version of google chrome installed.
+You need Python 3.10 or a newer Version to run your code.  
+Make sure you have the latest version of Google Chrome installed.
 
 ### Python Modules
 ```
@@ -23,9 +23,9 @@ If you want to use the Autobumper by links, put your links in options/threads.tx
 
 ## Usage
 
-Execute the main.py script in your and chose the option of your choice.  
+Execute the main.py script in your terminal and chose the option of your choice.  
 After the browser opens, manually open https://flipd.gg in a new tab and wait for cloudflare to finish.  
-Resize the browser window to its minimum width - the login buttons should be under each other.  
+Resize the browser window to its minimum width and wait for flipd to open in the first tab. 
 Keep the chrome window in focus, everything should work fine now.
 
 ## Help
