@@ -8,7 +8,7 @@ from config import username, password
 # pip install selenium==4.12.0
 # pip install undetected-chromedriver
 
-class Autobumper:
+class LinkBumper:
 
     def __init__(self):
         options = uc.ChromeOptions()

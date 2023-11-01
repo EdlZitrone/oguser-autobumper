@@ -1,6 +1,6 @@
-from award_farmer import Awardfarmer
-from bump_by_links import Autobumper as Link_Bumper
-from bump_by_profile import Autobumper as Profile_Bumper
+from options.award_farmer import Awardfarmer
+from options.bump_by_links import LinkBumper
+from options.bump_by_profile import ProfileBumper
 
 class bcolors:
     HEADER = '\033[95m'
@@ -44,10 +44,10 @@ class Flipdbumper:
 
         if (mode == '1'):
             print(bcolors.WARNING + "\n Starting Autobumper..." + bcolors.ENDC)
-            Profile_Bumper()
+            ProfileBumper()
         elif (mode == '2'):
             print(bcolors.WARNING + "\n Starting Autobumper..." + bcolors.ENDC)
-            Link_Bumper()
+            LinkBumper()
         elif (mode == '3'):
             link = input(bcolors.HEADER + "Enter link to Farming thread: " + bcolors.ENDC)
             print(bcolors.WARNING + "\n Starting Awardfarmer..." + bcolors.ENDC)
