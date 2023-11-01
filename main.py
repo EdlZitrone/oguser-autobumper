@@ -32,7 +32,7 @@ class Flipdbumper:
  ░ ░     ░ ░    ▒ ░░░        ░ ░  ░  ░    ░  ░░░ ░ ░ ░      ░   ░░          ░     ░░   ░ 
            ░  ░ ░              ░     ░         ░            ░               ░  ░   ░     
                              ░            ░                                              
-                                                           t.me/beamertaken''' + bcolors.ENDC
+                                                                    flipd.gg/mf''' + bcolors.ENDC
         print(header + '\n')
 
     def menu(self):
@@ -40,7 +40,7 @@ class Flipdbumper:
         print(bcolors.WARNING + "[2] Autobumper by threads from threads.txt." + bcolors.ENDC)
         print(bcolors.WARNING + "[3] Awardfarmer by thread link input." + bcolors.ENDC)
         print(bcolors.WARNING + "[4] Exit Flipdbumper." + bcolors.ENDC)
-        mode = input(bcolors.HEADER + "Enter the number of the preferred option: " + bcolors.ENDC)
+        mode = input(bcolors.HEADER + "\nEnter the number of the preferred option: " + bcolors.ENDC)
 
         if (mode == '1'):
             print(bcolors.WARNING + "\nStarting Autobumper..." + bcolors.ENDC)

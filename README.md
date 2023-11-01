@@ -2,7 +2,7 @@
 
 ## Preview:
 
-![alt text](https://cdn.discordapp.com/attachments/1054003274111520868/1169394331644330155/image.png?ex=65553e56&is=6542c956&hm=abfe036e57c07534645ccb311944cbf2a80b05baa1c9061b062302714f6cb307&)
+![alt text](https://cdn.discordapp.com/attachments/1054003274111520868/1169405019364278353/image.png?ex=6555484b&is=6542d34b&hm=4f339f6cc5c91cf44985acc34ffe398b8714a40b12bb9d1006659633ef59aced&)
 
 ## Setup:
 
