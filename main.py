@@ -40,22 +40,23 @@ class Flipdbumper:
         print(bcolors.WARNING + "[2] Autobumper by threads from threads.txt." + bcolors.ENDC)
         print(bcolors.WARNING + "[3] Awardfarmer by thread link input." + bcolors.ENDC)
         print(bcolors.WARNING + "[4] Exit Flipdbumper." + bcolors.ENDC)
+        print('\n')
         mode = input(bcolors.HEADER + "Enter the number of the preferred option: " + bcolors.ENDC)
 
         if (mode == '1'):
-            print(bcolors.WARNING + "\n Starting Autobumper..." + bcolors.ENDC)
+            print(bcolors.WARNING + "\nStarting Autobumper..." + bcolors.ENDC)
             ProfileBumper()
         elif (mode == '2'):
-            print(bcolors.WARNING + "\n Starting Autobumper..." + bcolors.ENDC)
+            print(bcolors.WARNING + "\nStarting Autobumper..." + bcolors.ENDC)
             LinkBumper()
         elif (mode == '3'):
             link = input(bcolors.HEADER + "Enter link to Farming thread: " + bcolors.ENDC)
-            print(bcolors.WARNING + "\n Starting Awardfarmer..." + bcolors.ENDC)
+            print(bcolors.WARNING + "\nStarting Awardfarmer..." + bcolors.ENDC)
             Awardfarmer(link)
         elif (mode == '4'):
-            print(bcolors.WARNING + "\n Exiting Flipd Bumper..." + bcolors.ENDC)
+            print(bcolors.WARNING + "\nExiting Flipd Bumper..." + bcolors.ENDC)
         else:
-            print(bcolors.WARNING + "\n Please chose one of the options above." + bcolors.ENDC)
+            print(bcolors.WARNING + "\nPlease chose one of the options above." + bcolors.ENDC)
             self.menu()
 
 if (__name__ == '__main__'):
