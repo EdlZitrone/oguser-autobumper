@@ -4,6 +4,11 @@
 
 ![alt text](https://cdn.discordapp.com/attachments/1054003274111520868/1169405019364278353/image.png?ex=6555484b&is=6542d34b&hm=4f339f6cc5c91cf44985acc34ffe398b8714a40b12bb9d1006659633ef59aced&)
 
+## Modes:
+[1] Bumps all threads from 'Shop' section on user profile with 30 minutes interval.  
+[2] Bumps all threads from links in threads.txt file every 30 minutes.  
+[3] Spams random messages in thread by input link. Useful for farming awards during events.  
+
 ## Setup:
 
 ### Requirements
