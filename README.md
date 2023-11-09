@@ -30,7 +30,7 @@ If you want to use the Autobumper by links, put your links in options/threads.tx
 
 Execute the main.py script in your terminal and chose the option of your choice.  
 After the browser opens, manually open https://flipd.gg in a new tab and wait for cloudflare to finish.  
-Resize the browser window to its minimum width and wait for flipd to open in the first tab. 
+Resize the browser window to its minimum width and wait for flipd to open in the first tab.  
 Keep the chrome window in focus, everything should work fine now.  
 Youtube Tutorial: https://youtu.be/MnZKXP-j6Qo
 
