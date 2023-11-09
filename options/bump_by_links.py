@@ -32,7 +32,7 @@ class LinkBumper:
     def login(self, username, password):
         self.driver.get('https://google.com')
         time.sleep(15)
-        self.driver.get(self.main_url)
+        self.driver.get(self.main_url + 'login')
         user_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[1]/td/label/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
         pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
