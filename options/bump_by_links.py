@@ -10,12 +10,12 @@ from config import username, password
 
 class LinkBumper:
 
-    def __init__(self):
+    def __init__(self, main_url):
         options = uc.ChromeOptions()
         options.add_argument("--window-size=920,600")
         self.driver = uc.Chrome(use_subprocess=True, options=options)
         self.wait = WebDriverWait(self.driver, 40)
-        self.main_url = "https://flipd.gg/"
+        self.main_url = main_url
         self.username = username
 
         self.login(username, password)
