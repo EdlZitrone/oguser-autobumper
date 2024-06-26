@@ -13,7 +13,7 @@ class Awardfarmer:
 
     def __init__(self, main_url, link):
         options = uc.ChromeOptions()
-        options.add_argument("--window-size=920,600")
+        options.add_argument('--disable-popup-blocking')
         self.driver = uc.Chrome(use_subprocess=True, options=options)
         self.wait = WebDriverWait(self.driver, 40)
         self.main_url = main_url
@@ -38,7 +38,12 @@ class Awardfarmer:
     # try to log in to the website with given user credentials
     def login(self, username, password):
         self.driver.get('https://google.com')
-        time.sleep(15)
+        self.driver.set_window_size(100,100)
+        time.sleep(3)
+        self.driver.execute_script(f"window.open('{self.main_url}', '_blank')")
+        time.sleep(7)
+        self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[0])
         self.driver.get(self.main_url + 'login')
         user_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[1]/td/label/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
