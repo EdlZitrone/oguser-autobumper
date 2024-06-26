@@ -1,20 +1,18 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-import undetected_chromedriver as uc
+from seleniumbase import Driver
 import randfacts
 import time
 from config import username, password
 
 # pip install selenium==4.12.0
-# pip install undetected-chromedriver
+# pip install seleniumbase
 
 class Awardfarmer:
 
     def __init__(self, main_url, link):
-        options = uc.ChromeOptions()
-        options.add_argument('--disable-popup-blocking')
-        self.driver = uc.Chrome(use_subprocess=True, options=options)
+        self.driver = Driver(uc=True, headless=True)
         self.wait = WebDriverWait(self.driver, 40)
         self.main_url = main_url
         self.username = username
