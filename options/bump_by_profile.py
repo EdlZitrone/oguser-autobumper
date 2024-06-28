@@ -29,7 +29,7 @@ class ProfileBumper:
     # try to log in to the website with given user credentials
     def login(self, username, password):
         self.driver.get('https://google.com')
-        self.driver.set_window_size(100,100)
+        self.driver.set_window_size(600, 600)
         time.sleep(3)
         self.driver.execute_script(f"window.open('{self.main_url}', '_blank')")
         time.sleep(7)
