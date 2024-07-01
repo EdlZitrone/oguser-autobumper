@@ -5,8 +5,8 @@
 ![alt text](images/preview.png)
 
 ## Modes:
-[1] Bumps all threads from 'Market' section on user profile with 30 minutes interval.  
-[2] Bumps all threads from links in threads.txt file every 30 minutes.  
+[1] Bumps all threads from 'Market' section on user profile with 1 hour interval.  
+[2] Bumps all threads from links in threads.txt file every hour.  
 [3] Spams random messages in thread by input link. Useful for farming awards during events.  
 
 ## Setup:
