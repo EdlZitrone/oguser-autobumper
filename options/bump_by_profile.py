@@ -22,9 +22,12 @@ class ProfileBumper:
     # loop to keep bumping all the threads as long as user is logged in
     def bumper(self):
         while True:
-            links = self.get_links()
-            self.bump_threads(links)
-            time.sleep(1800 - len(links)*7)
+            try:
+                links = self.get_links()
+                self.bump_threads(links)
+                time.sleep(2*1800 - len(links)*7)
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
 
     # try to log in to the website with given user credentials
     def login(self, username, password):
