@@ -22,7 +22,7 @@ pip install randfacts
 ```
 
 ### Files
-Enter your flipd username and password in config.py.
+Enter your username and password in config.py.
 If you want to use the Autobumper by links, put your links in threads.txt
 
 ## Usage
