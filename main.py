@@ -1,6 +1,4 @@
-from options.award_farmer import Awardfarmer
-from options.bump_by_links import LinkBumper
-from options.bump_by_profile import ProfileBumper
+from options import Awardfarmer, LinkBumper, ProfileBumper
 
 class bcolors:
     HEADER = '\033[95m'
