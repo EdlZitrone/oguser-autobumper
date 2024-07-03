@@ -11,7 +11,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-class OguserBumper:
+class OGUBumper:
 
     def __init__(self) -> None:
         self.main_url = "https://oguser.com/"
@@ -58,4 +58,4 @@ class OguserBumper:
             self.menu()
 
 if (__name__ == '__main__'):
-    OguserBumper()
+    OGUBumper()
