@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from seleniumbase import Driver
 import randfacts
+import datetime
 import time
 from config import username, password
 
@@ -24,7 +25,10 @@ class Awardfarmer:
     # loop to keep bumping all the threads as long as user is logged in
     def bumper(self):
         while True:
-            self.bump()
+            try:
+                self.bump
+            except Exception as e:
+                print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
 
     def get_reply_link(self, link):
         self.driver.get(link)

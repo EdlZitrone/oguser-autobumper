@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from seleniumbase import Driver
+import datetime
 import time
 from config import username, password
 
@@ -25,9 +26,9 @@ class ProfileBumper:
             try:
                 links = self.get_links()
                 self.bump_threads(links)
-                time.sleep(2*1800 - len(links)*7)
+                time.sleep(4*1800 - len(links)*7)
             except Exception as e:
-                print(f"An error occurred: {str(e)}")
+                print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
 
     # try to log in to the website with given user credentials
     def login(self, username, password):
