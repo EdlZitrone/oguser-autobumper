@@ -61,7 +61,7 @@ class LinkBumper:
         links = []
         with open('threads.txt') as file:
             for line in file:
-                links.append(line)
+                links.append(line.split("\n")[0])
         return links
 
     # get list of newreply links with given thread link list
