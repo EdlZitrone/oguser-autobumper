@@ -26,7 +26,7 @@ class Awardfarmer:
     def bumper(self):
         while True:
             try:
-                self.bump
+                self.bump()
             except Exception as e:
                 print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
 
