@@ -35,11 +35,10 @@ class LinkBumper:
         self.driver.get('https://google.com')
         self.driver.set_window_size(600, 600)
         time.sleep(3)
-        self.driver.execute_script(f"window.open('{self.main_url}', '_blank')")
+        self.driver.get(self.main_url)
         time.sleep(7)
-        self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[0])
-        self.driver.get(self.main_url + 'login')
+        self.wait.until(ec.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div[1]/div[3]/a'))).click()
         user_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[1]/td/label/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
         pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
