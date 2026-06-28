@@ -66,9 +66,14 @@ class Awardfarmer:
     def bump(self):
         self.driver.get(self.reply_link)
         fact = randfacts.get_fact()
-        self.wait.until(ec.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, 'iframe')))
-        self.wait.until(ec.element_to_be_clickable((By.XPATH, '/html/body'))).send_keys(fact)
+
+        self.wait.until(ec.frame_to_be_available_and_switch_to_it(
+            (By.CSS_SELECTOR, 'div.sceditor-container iframe')))
+        body = self.wait.until(ec.element_to_be_clickable((By.TAG_NAME, 'body')))
+        body.click()
+        body.send_keys(fact)
         self.driver.switch_to.default_content()
+
         button_xpath = '//*[@id="fullcontainment"]/div[1]/form/div[2]/input[1]'
         self.wait.until(ec.element_to_be_clickable((By.XPATH, button_xpath))).click()
         print('SENT: ' + fact)
