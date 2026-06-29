@@ -56,6 +56,7 @@ python main.py
 ## Help
 
 Please leave a star on the repository if it is useful to you.  
+I can implement features like 2FA support for a small fee.  
 If you need any help with the script feel free to reach out.  
 Discord: edlzitrone    -    Telegram: @beamertaken - OGU: mf
 
