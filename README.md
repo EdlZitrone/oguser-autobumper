@@ -38,8 +38,8 @@ pip install -r requirements.txt
 
 ## Usage
 
-Enter your username and password in config.py.
-If you want to use the Autobumper by links, put the urls in threads.txt
+Enter your username and password in [config.py](config.py).  
+If you want to use the Autobumper by links, put the urls in [threads.txt](threads.txt)
 
 Enter 'oguser-autobumer' directory in terminal and run:
 
@@ -55,7 +55,7 @@ python main.py
 
 ## Help
 
-Please leave a star on the repository if it is useful to you.
-If you need any help with the script feel free to reach out.
+Please leave a star on the repository if it is useful to you.  
+If you need any help with the script feel free to reach out.  
 Discord: edlzitrone    -    Telegram: @beamertaken - OGU: mf
 
