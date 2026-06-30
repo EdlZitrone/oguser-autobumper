@@ -2,7 +2,6 @@ import argparse
 
 from options import Awardfarmer, LinkBumper, ProfileBumper
 
-
 def str2bool(value):
     if isinstance(value, bool):
         return value
@@ -12,13 +11,11 @@ def str2bool(value):
         return False
     raise argparse.ArgumentTypeError('Boolean value expected (true/false).')
 
-
 def parse_args():
-    parser = argparse.ArgumentParser(description="OGU Bumper")
+    parser = argparse.ArgumentParser(description="OGU Bumper - A lightweight Autobumper and Awardfarmer (Events) for https://oguser.com written in Python.")
     parser.add_argument('--headless', type=str2bool, default=True,
                          help="Run browser in headless mode (default: True)")
     return parser.parse_args()
-
 
 class bcolors:
     HEADER = '\033[95m'
@@ -69,7 +66,6 @@ def menu(args):
     else:
         print(bcolors.WARNING + "\nPlease chose one of the options above." + bcolors.ENDC)
         menu(args)
-
 
 if __name__ == '__main__':
     args = parse_args()

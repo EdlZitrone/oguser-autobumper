@@ -2,3 +2,4 @@ randfacts==0.20.2
 selenium
 seleniumbase==4.28.0
 datetime
+pyotp

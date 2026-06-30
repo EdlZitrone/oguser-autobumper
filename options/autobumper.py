@@ -9,7 +9,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from seleniumbase import Driver
 
-from config import username, password
+import pyotp
+
+from config import username, password, secret
 
 class Autobumper(ABC):
 
@@ -19,7 +21,7 @@ class Autobumper(ABC):
         self.driver = Driver(uc=True, headless=headless)
         self.wait = WebDriverWait(self.driver, 40)
 
-        self.login(username, password)
+        self.login(username, password, secret)
         self.my_post_key = self.get_post_key()
 
     @abstractmethod
@@ -57,7 +59,7 @@ class Autobumper(ABC):
         title = self.get_title(link)
         return tid, title
     
-    def login(self, username, password):
+    def login(self, username, password, secret):
         self.driver.get('https://google.com')
         self.driver.set_window_size(600, 600)
         time.sleep(3)
@@ -69,6 +71,10 @@ class Autobumper(ABC):
         self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
         pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
+        if secret:
+            code = pyotp.TOTP(secret).now()
+            auth_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[3]/td/label/input'
+            self.wait.until(ec.visibility_of_element_located((By.XPATH, auth_xpath))).send_keys(code)
         login_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[4]/td/span/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
         profile_xpath = '//*[@id="dropdown-profile-mobile"]'

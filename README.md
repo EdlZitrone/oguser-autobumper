@@ -39,7 +39,8 @@ pip install -r requirements.txt
 ## Usage
 
 Enter your username and password in [config.py](config.py).  
-If you want to use the Autobumper by links, put the urls in [threads.txt](threads.txt).
+If you have 2FA enabled also enter the `secret`, which was shown when initialising the 2FA.
+In case you want to use the Autobumper by links, put the urls in [threads.txt](threads.txt).
 
 Run the following command inside the `oguser-autobumper` directory:
 
@@ -56,7 +57,6 @@ python main.py
 ## Help
 
 Please leave a star on the repository if it is useful to you.  
-I can implement features like 2FA support for a small fee.  
 If you need any help with the script feel free to reach out.  
 Discord: [edlzitrone](https://discord.com/users/565016982768844800)    -    Telegram: [beamertaken](https://t.me/beamertaken) - OGU: [mf](https://oguser.com/mf)
 
