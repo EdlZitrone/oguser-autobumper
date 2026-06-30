@@ -39,7 +39,8 @@ pip install -r requirements.txt
 ## Usage
 
 Enter your username and password in [config.py](config.py).  
-If you have 2FA enabled also enter the `secret`, which was shown when initialising the 2FA.
+If you have 2FA enabled also enter the `secret`, which was shown when initialising the 2FA.  
+To see the 2FA secret you might have to reset your 2FA and it will show below the QR code.  
 In case you want to use the Autobumper by links, put the urls in [threads.txt](threads.txt).
 
 Run the following command inside the `oguser-autobumper` directory:
