@@ -3,6 +3,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from seleniumbase import Driver
 import randfacts
+import requests
+import re
 import datetime
 import time
 from config import username, password
@@ -19,7 +21,8 @@ class Awardfarmer:
         self.username = username
 
         self.login(username, password)
-        self.reply_link = self.get_reply_link(link)
+        self.my_post_key = self.get_post_key()
+        self.tid = self.get_tid(link)
         self.bumper()
 
     # loop to keep bumping all the threads as long as user is logged in
@@ -28,7 +31,9 @@ class Awardfarmer:
             try:
                 self.bump()
             except Exception as e:
+                print(f"Error: {e}")
                 print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
+                time.sleep(0.5)
 
     def get_reply_link(self, link):
         self.driver.get(link)
@@ -36,6 +41,18 @@ class Awardfarmer:
         element = self.wait.until(ec.visibility_of_element_located((By.XPATH, newreply_xpath)))
         reply_link = element.get_attribute('href')
         return reply_link
+    
+    def get_tid(self, link):
+        self.driver.get(link)
+        html = self.driver.page_source
+        tid = re.search(r'name="tid" value="([^"]+)"', html).group(1)
+        return tid
+    
+    def get_post_key(self):
+        self.driver.get("https://oguser.com/Thread-Like--753639")
+        html = self.driver.page_source
+        post_key = re.search(r'my_post_key=([a-f0-9]{32})', html).group(1)
+        return post_key
 
     # try to log in to the website with given user credentials
     def login(self, username, password):
@@ -52,7 +69,8 @@ class Awardfarmer:
         self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
         login_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[4]/td/span/input'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
-        time.sleep(10)
+        profile_xpath = '//*[@id="dropdown-profile-mobile"]'
+        self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
 
     # check if user is still logged in. return True is he is
     def logged_in(self) -> bool:
@@ -63,7 +81,7 @@ class Awardfarmer:
         return len(elements) > 0
 
     # replys random fact under tid
-    def bump(self):
+    def bump_old(self):
         self.driver.get(self.reply_link)
         fact = randfacts.get_fact()
 
@@ -78,3 +96,32 @@ class Awardfarmer:
         self.wait.until(ec.element_to_be_clickable((By.XPATH, button_xpath))).click()
         print('SENT: ' + fact)
         time.sleep(7)
+
+    def bump(self):
+        fact = randfacts.get_fact()
+
+        cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}
+
+        data = {
+            "my_post_key": self.my_post_key,
+            "subject": 0,
+            "action": "do_newreply",
+            "posthash": 0,
+            "quoted_ids": "",
+            "lastpid": 0,
+            "from_page": "1",
+            "tid": self.tid,
+            "method": "quickreply",
+            "message": fact,
+        }
+
+        resp = requests.post(
+            f"{self.main_url}/newreply.php?tid={self.tid}&processed=1",
+            data=data,
+            cookies=cookies,
+            headers={"User-Agent": self.driver.execute_script("return navigator.userAgent")}
+        )
+
+        print(f'SENT: {fact}')
+        time.sleep(7)
+
