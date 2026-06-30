@@ -7,8 +7,8 @@ from options.autobumper import Autobumper
 
 class ProfileBumper(Autobumper):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, headless):
+        super().__init__(headless)
 
         links = self.get_links()
         results = [self.get_tid_and_title(link) for link in links]

@@ -6,8 +6,8 @@ from options.autobumper import Autobumper
 
 class Awardfarmer(Autobumper):
 
-    def __init__(self, link):
-        super().__init__()
+    def __init__(self, link, headless):
+        super().__init__(headless)
 
         self.tid = self.get_tid(link)
         self.bumper()

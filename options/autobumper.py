@@ -13,10 +13,10 @@ from config import username, password
 
 class Autobumper(ABC):
 
-    def __init__(self) -> None:
+    def __init__(self, headless) -> None:
         self.main_url = "https://oguser.com/"
         self.username = username
-        self.driver = Driver(uc=True, headless=False)
+        self.driver = Driver(uc=True, headless=headless)
         self.wait = WebDriverWait(self.driver, 40)
 
         self.login(username, password)
@@ -73,6 +73,7 @@ class Autobumper(ABC):
         self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
         profile_xpath = '//*[@id="dropdown-profile-mobile"]'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
+        print("Status: Logged in.")
 
     def newreply(self, tid, message):
       cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}

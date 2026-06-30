@@ -1,4 +1,24 @@
+import argparse
+
 from options import Awardfarmer, LinkBumper, ProfileBumper
+
+
+def str2bool(value):
+    if isinstance(value, bool):
+        return value
+    if value.lower() in ('true', '1', 'yes', 'y'):
+        return True
+    elif value.lower() in ('false', '0', 'no', 'n'):
+        return False
+    raise argparse.ArgumentTypeError('Boolean value expected (true/false).')
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="OGU Bumper")
+    parser.add_argument('--headless', type=str2bool, default=True,
+                         help="Run browser in headless mode (default: True)")
+    return parser.parse_args()
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -27,29 +47,31 @@ def header():
                                                                     oguser.com/mf''' + bcolors.ENDC
     print(header + '\n')
 
-def menu():
+def menu(args):
     print(bcolors.WARNING + "[1] Autobumper by threads from profile." + bcolors.ENDC)
     print(bcolors.WARNING + "[2] Autobumper by threads from threads.txt." + bcolors.ENDC)
     print(bcolors.WARNING + "[3] Awardfarmer by thread link input." + bcolors.ENDC)
     print(bcolors.WARNING + "[4] Exit OGU Bumper." + bcolors.ENDC)
     mode = input(bcolors.HEADER + "\nEnter the number of the preferred option: " + bcolors.ENDC)
 
-    if (mode == '1'):
+    if mode == '1':
         print(bcolors.WARNING + "\nStarting Autobumper..." + bcolors.ENDC)
-        ProfileBumper()
-    elif (mode == '2'):
+        ProfileBumper(headless=args.headless)
+    elif mode == '2':
         print(bcolors.WARNING + "\nStarting Autobumper..." + bcolors.ENDC)
-        LinkBumper()
-    elif (mode == '3'):
+        LinkBumper(headless=args.headless)
+    elif mode == '3':
         link = input(bcolors.HEADER + "Enter link to Farming thread: " + bcolors.ENDC)
         print(bcolors.WARNING + "\nStarting Awardfarmer..." + bcolors.ENDC)
-        Awardfarmer(link=link)
-    elif (mode == '4'):
+        Awardfarmer(link=link, headless=args.headless)
+    elif mode == '4':
         print(bcolors.WARNING + "\nExiting OGU Bumper..." + bcolors.ENDC)
     else:
         print(bcolors.WARNING + "\nPlease chose one of the options above." + bcolors.ENDC)
-        menu()
+        menu(args)
 
-if (__name__ == '__main__'):
+
+if __name__ == '__main__':
+    args = parse_args()
     header()
-    menu()
+    menu(args)

@@ -5,8 +5,8 @@ from options.autobumper import Autobumper
 
 class LinkBumper(Autobumper):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, headless):
+        super().__init__(headless)
 
         links = self.get_links()
         self.tids = [ self.get_tid(link) for link in links ]
