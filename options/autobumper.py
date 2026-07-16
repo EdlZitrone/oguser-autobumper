@@ -16,7 +16,7 @@ from config import username, password, secret
 class Autobumper(ABC):
 
     def __init__(self, headless) -> None:
-        self.main_url = "https://oguser.com/"
+        self.main_url = "https://ogusers.gg/"
         self.username = username
         self.driver = Driver(uc=True, headless=headless)
         self.wait = WebDriverWait(self.driver, 40)
@@ -29,7 +29,7 @@ class Autobumper(ABC):
         pass
 
     def get_post_key(self):
-        self.driver.get("https://oguser.com/Thread-Like--753639")
+        self.driver.get(self.main_url + "Thread-Like--753639")
         html = self.driver.page_source
         post_key = re.search(r'my_post_key=([a-f0-9]{32})', html).group(1)
         return post_key
@@ -79,7 +79,7 @@ class Autobumper(ABC):
         self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
         profile_xpath = '//*[@id="dropdown-profile-mobile"]'
         self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
-        print("Status: Logged in.")
+        print("STATUS: Logged in.")
 
     def newreply(self, tid, message):
       cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}

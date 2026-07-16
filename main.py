@@ -12,7 +12,7 @@ def str2bool(value):
     raise argparse.ArgumentTypeError('Boolean value expected (true/false).')
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="OGU Bumper - A lightweight Autobumper and Awardfarmer (Events) for https://oguser.com written in Python.")
+    parser = argparse.ArgumentParser(description="OGU Bumper - A lightweight Autobumper and Awardfarmer (Events) for https://ogusers.gg written in Python.")
     parser.add_argument('--headless', type=str2bool, default=True,
                          help="Run browser in headless mode (default: True)")
     return parser.parse_args()
@@ -41,7 +41,7 @@ def header():
 ░ ░ ░ ▒  ░ ░   ░  ░░░ ░ ░     ░    ░  ░░░ ░ ░ ░      ░   ░░          ░     ░░   ░ 
     ░ ░        ░    ░         ░         ░            ░               ░  ░   ░     
                                    ░                                              
-                                                                    oguser.com/mf''' + bcolors.ENDC
+                                                                    ogusers.gg/mf''' + bcolors.ENDC
     print(header + '\n')
 
 def menu(args):

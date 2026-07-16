@@ -59,5 +59,5 @@ python main.py
 
 Please leave a star on the repository if it is useful to you.  
 If you need any help with the script feel free to reach out.  
-Discord: [edlzitrone](https://discord.com/users/565016982768844800)    -    Telegram: [beamertaken](https://t.me/beamertaken) - OGU: [mf](https://oguser.com/mf)
+Discord: [edlzitrone](https://discord.com/users/565016982768844800)    -    Telegram: [beamertaken](https://t.me/beamertaken) - OGU: [mf](https://ogusers.gg/mf)
 
