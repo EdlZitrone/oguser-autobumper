@@ -1,4 +1,5 @@
-# OGU Bumper (Working  07/2026)
+# OGU Bumper (Working  08/2026)
+A lightweight Autobumper and Awardfarmer (Events) for [ogusers.gg](https://ogusers.gg) (previously [oguser.com](https://oguser.com)) written in Python with Selenium.
 
 ## Preview:
 
