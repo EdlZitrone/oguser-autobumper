@@ -1,5 +1,5 @@
 # OGU Bumper (Working  08/2026)
-A lightweight Autobumper and Awardfarmer (Events) for [ogusers.gg](https://ogusers.gg) (previously [oguser.com](https://oguser.com)) written in Python with Selenium.
+A lightweight Autobumper and Awardfarmer (Events) for [ogusers.gg](https://ogusers.gg) (previously [oguser.com](https://oguser.com)) written in Python with Selenium. It offers three [modes](#modes) to bump threads via profile, a link list, or an event thread. Since its latest release, OGU Bumper supports logging in with 2FA enabled.
 
 ## Preview:
 
