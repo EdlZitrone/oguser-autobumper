@@ -16,7 +16,7 @@ from config import username, password, secret
 class Autobumper(ABC):
 
     def __init__(self, headless) -> None:
-        self.main_url = "https://ogusers.gg/"
+        self.main_url = "https://oguser.com/"
         self.username = username
         self.driver = Driver(uc=True, headless=headless)
         self.wait = WebDriverWait(self.driver, 40)
