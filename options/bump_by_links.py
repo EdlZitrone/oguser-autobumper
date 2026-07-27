@@ -19,9 +19,9 @@ class LinkBumper(Autobumper):
             for i in range(len(self.tids)):
                 try:
                     self.newreply(self.tids[i], self.titles[i])
-                    time.sleep(7)
+                    time.sleep(8)
                 except Exception as e:
-                    print(f"Error: {e}")
+                    print(f"ERROR: {e}")
                     print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
                     time.sleep(0.5)
             print('Finished bumping all threads!')

@@ -29,7 +29,7 @@ class Autobumper(ABC):
         pass
 
     def get_post_key(self):
-        self.driver.get(self.main_url + "Thread-Like--753639")
+        self.driver.get(self.main_url + "Thread-RIP-OGFLIP")
         html = self.driver.page_source
         post_key = re.search(r'my_post_key=([a-f0-9]{32})', html).group(1)
         return post_key
@@ -60,26 +60,29 @@ class Autobumper(ABC):
         return tid, title
     
     def login(self, username, password, secret):
-        self.driver.get('https://google.com')
-        self.driver.set_window_size(600, 600)
-        time.sleep(3)
-        self.driver.get(self.main_url)
-        time.sleep(7)
-        self.driver.switch_to.window(self.driver.window_handles[0])
-        self.wait.until(ec.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[1]/div[3]/a'))).click()
-        user_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[1]/td/label/input'
-        self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
-        pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
-        self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
-        if secret:
-            code = pyotp.TOTP(secret).now()
-            auth_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[3]/td/label/input'
-            self.wait.until(ec.visibility_of_element_located((By.XPATH, auth_xpath))).send_keys(code)
-        login_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[4]/td/span/input'
-        self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
-        profile_xpath = '//*[@id="dropdown-profile-mobile"]'
-        self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
-        print("STATUS: Logged in.")
+        try:
+            self.driver.get('https://google.com')
+            self.driver.set_window_size(600, 600)
+            time.sleep(3)
+            self.driver.get(self.main_url)
+            time.sleep(7)
+            self.driver.switch_to.window(self.driver.window_handles[0])
+            self.wait.until(ec.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[1]/div[3]/a'))).click()
+            user_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[1]/td/label/input'
+            self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
+            pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
+            self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
+            if secret:
+                code = pyotp.TOTP(secret).now()
+                auth_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[3]/td/label/input'
+                self.wait.until(ec.visibility_of_element_located((By.XPATH, auth_xpath))).send_keys(code)
+            login_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[4]/td/span/input'
+            self.wait.until(ec.visibility_of_element_located((By.XPATH, login_xpath))).click()
+            profile_xpath = '//*[@id="dropdown-profile-mobile"]'
+            self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
+            print("STATUS: Logged in.")
+        except Exception:
+            raise Exception('ERROR: Login failed. Consider running the script with `--headless=False`.')
 
     def newreply(self, tid, message):
       cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}
@@ -97,11 +100,14 @@ class Autobumper(ABC):
           "message": message,
       }
 
-      requests.post(
+      response = requests.post(
           f"{self.main_url}/newreply.php?tid={tid}&processed=1",
           data=data,
           cookies=cookies,
           headers={"User-Agent": self.driver.execute_script("return navigator.userAgent")}
       )
 
-      print(f'SENT: {message}')
+      if not response.ok:
+          raise Exception(f'Could not send message {message}. Status code {response.status_code}.')
+
+      print(f'SENT - {response.status_code}: {message}')
