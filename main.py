@@ -1,6 +1,6 @@
 import argparse
 
-from options import Awardfarmer, LinkBumper, ProfileBumper
+from src import Awardfarmer, LinkBumper, ProfileBumper
 
 def str2bool(value):
     if isinstance(value, bool):

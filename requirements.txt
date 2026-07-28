@@ -3,3 +3,4 @@ selenium
 seleniumbase==4.28.0
 datetime
 pyotp
+beautifulsoup4

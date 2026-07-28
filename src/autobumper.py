@@ -9,6 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from seleniumbase import Driver
 
+from bs4 import BeautifulSoup
+
 import pyotp
 
 from config import username, password, secret
@@ -82,32 +84,40 @@ class Autobumper(ABC):
             self.wait.until(ec.visibility_of_element_located((By.XPATH, profile_xpath)))
             print("STATUS: Logged in.")
         except Exception:
-            raise Exception('ERROR: Login failed. Consider running the script with `--headless=False`.')
+            raise Exception('Login failed. Consider running the script with `--headless=False`.')
 
     def newreply(self, tid, message):
-      cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}
+        cookies = {c['name']: c['value'] for c in self.driver.get_cookies()}
 
-      data = {
-          "my_post_key": self.my_post_key,
-          "subject": 0,
-          "action": "do_newreply",
-          "posthash": 0,
-          "quoted_ids": "",
-          "lastpid": 0,
-          "from_page": "1",
-          "tid": tid,
-          "method": "quickreply",
-          "message": message,
-      }
+        data = {
+            "my_post_key": self.my_post_key,
+            "subject": 0,
+            "action": "do_newreply",
+            "posthash": 0,
+            "quoted_ids": "",
+            "lastpid": 0,
+            "from_page": "1",
+            "tid": tid,
+            "method": "quickreply",
+            "message": message,
+        }
 
-      response = requests.post(
-          f"{self.main_url}/newreply.php?tid={tid}&processed=1",
-          data=data,
-          cookies=cookies,
-          headers={"User-Agent": self.driver.execute_script("return navigator.userAgent")}
-      )
+        response = requests.post(
+            f"{self.main_url}/newreply.php?tid={tid}&processed=1",
+            data=data,
+            cookies=cookies,
+            headers={"User-Agent": self.driver.execute_script("return navigator.userAgent")}
+        )
 
-      if not response.ok:
-          raise Exception(f'Could not send message {message}. Status code {response.status_code}.')
+        if not response.ok:
+            raise Exception(f'Could not send message {message}. Status code {response.status_code}.')
 
-      print(f'SENT - {response.status_code}: {message}')
+        soup = BeautifulSoup(response.text, "html.parser")
+        error_div = soup.find("div", class_="error")
+
+        if error_div:
+            error_messages = [li.get_text(strip=True) for li in error_div.find_all("li")]
+            error_text = "; ".join(error_messages) if error_messages else error_div.get_text(strip=True)
+            raise Exception(f'Forum rejected message "{message}": {error_text}')
+
+        print(f'SENT: {message}')

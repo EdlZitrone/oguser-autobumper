@@ -1,7 +1,7 @@
 import datetime
 import time
 
-from options.autobumper import Autobumper
+from src.autobumper import Autobumper
 
 class LinkBumper(Autobumper):
 
@@ -19,13 +19,12 @@ class LinkBumper(Autobumper):
             for i in range(len(self.tids)):
                 try:
                     self.newreply(self.tids[i], self.titles[i])
-                    time.sleep(8)
+                    time.sleep(10)
                 except Exception as e:
                     print(f"ERROR: {e}")
-                    print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
                     time.sleep(0.5)
             print('Finished bumping all threads!')
-            time.sleep(4*1800 - len(self.tids)*7)
+            time.sleep(4*1800 - len(self.tids)*10)
 
     def get_links(self):
         links = []

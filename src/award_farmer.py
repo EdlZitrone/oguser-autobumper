@@ -2,7 +2,7 @@ import randfacts
 import datetime
 import time
 
-from options.autobumper import Autobumper
+from src.autobumper import Autobumper
 
 class Awardfarmer(Autobumper):
 
@@ -19,6 +19,5 @@ class Awardfarmer(Autobumper):
                 self.newreply(self.tid, fact)
                 time.sleep(7)
             except Exception as e:
-                print(f"Error: {e}")
-                print(f"{datetime.datetime.now().replace(microsecond=0)} : An error occurred. The script continutes...")
+                print(f"ERROR: {e}")
                 time.sleep(0.5)
