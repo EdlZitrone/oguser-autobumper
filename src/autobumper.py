@@ -1,4 +1,5 @@
 import requests
+import datetime
 import time
 import re
 
@@ -75,7 +76,11 @@ class Autobumper(ABC):
             pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
             self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
             if secret:
-                code = pyotp.TOTP(secret).now()
+                totp = pyotp.TOTP(secret)
+                time_remaining = totp.interval - datetime.datetime.now().timestamp() % totp.interval
+                if time_remaining <= 5:
+                    time.sleep(time_remaining+1)
+                code = totp.now()
                 auth_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[3]/td/label/input'
                 self.wait.until(ec.visibility_of_element_located((By.XPATH, auth_xpath))).send_keys(code)
             login_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[4]/td/span/input'
