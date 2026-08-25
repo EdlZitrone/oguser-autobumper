@@ -21,11 +21,27 @@ class Autobumper(ABC):
     def __init__(self, headless) -> None:
         self.main_url = "https://oguser.com/"
         self.username = username
+        self.headless = headless
         self.driver = Driver(uc=True, headless=headless)
-        self.wait = WebDriverWait(self.driver, 40)
+        self.wait = WebDriverWait(self.driver, 25)
 
-        self.login(username, password, secret)
-        self.my_post_key = self.get_post_key()
+        self.login()
+        self.update_post_key()
+
+    def is_driver_alive(self):
+        try:
+            _ = self.driver.title
+            return True
+        except Exception:
+            return False
+
+    def restart_driver(self):
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
+        self.driver = Driver(uc=True, headless=self.headless)
+        self.wait = WebDriverWait(self.driver, 25)
 
     @abstractmethod
     def bumper(self):
@@ -36,6 +52,10 @@ class Autobumper(ABC):
         html = self.driver.page_source
         post_key = re.search(r'my_post_key=([a-f0-9]{32})', html).group(1)
         return post_key
+
+    def update_post_key(self):
+        post_key = self.get_post_key()
+        self.my_post_key = post_key
     
     def get_tid(self, link):
         if self.driver.current_url != link:
@@ -61,8 +81,17 @@ class Autobumper(ABC):
         tid = self.get_tid(link)
         title = self.get_title(link)
         return tid, title
+
+    def is_logged_in(self):
+        self.driver.get(self.main_url)
+        try:
+            short_wait = WebDriverWait(self.driver, 5)
+            short_wait.until(ec.presence_of_element_located((By.XPATH, '//*[@id="dropdown-profile-mobile"]')))
+            return True
+        except Exception:
+            return False
     
-    def login(self, username, password, secret):
+    def login(self):
         try:
             self.driver.get('https://google.com')
             self.driver.set_window_size(600, 600)
