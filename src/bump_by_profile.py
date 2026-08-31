@@ -18,15 +18,24 @@ class ProfileBumper(Autobumper):
 
     def bumper(self):
         while True:
+            if not self.is_driver_alive():
+                print("STATUS: Browser session lost. Restarting driver...")
+                self.restart_driver()
+
+            if not self.is_logged_in():
+                print("STATUS: Not logged in. Trying to log in again...")
+                self.login()
+                self.update_post_key()
+
             for i in range(len(self.tids)):
                 try:
                     self.newreply(self.tids[i], self.titles[i])
-                    time.sleep(10)
+                    time.sleep(11)
                 except Exception as e:
                     print(f"ERROR: {e}")
                     time.sleep(0.5)
             print('Finished bumping all threads!')
-            time.sleep(4*1800 - len(self.tids)*10)
+            time.sleep(4*1800 - len(self.tids)*5)
 
     def get_links(self):
         self.driver.get(self.main_url + self.username)

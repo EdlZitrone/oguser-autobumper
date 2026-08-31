@@ -10,7 +10,7 @@ class LinkBumper(Autobumper):
         links = self.get_links()
         self.tids = [ self.get_tid(link) for link in links ]
         self.titles = [ self.get_title(link) for link in links ]
-        
+
         self.bumper()
 
     def bumper(self):
@@ -32,7 +32,7 @@ class LinkBumper(Autobumper):
                     print(f"ERROR: {e}")
                     time.sleep(0.5)
             print('Finished bumping all threads!')
-            time.sleep(4*1800 - len(self.tids)*0)
+            time.sleep(4*1800 - len(self.tids)*5)
 
     def get_links(self):
         links = []

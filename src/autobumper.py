@@ -56,14 +56,14 @@ class Autobumper(ABC):
     def update_post_key(self):
         post_key = self.get_post_key()
         self.my_post_key = post_key
-    
+
     def get_tid(self, link):
         if self.driver.current_url != link:
             self.driver.get(link)
         html = self.driver.page_source
         tid = re.search(r'name="tid" value="([^"]+)"', html).group(1)
         return tid
-    
+
     def get_title(self, link):
         if self.driver.current_url != link:
             self.driver.get(link)
@@ -76,7 +76,7 @@ class Autobumper(ABC):
             title_element
         )
         return title.replace('\xa0', ' ').strip().upper()
-    
+
     def get_tid_and_title(self, link):
         tid = self.get_tid(link)
         title = self.get_title(link)
@@ -90,7 +90,7 @@ class Autobumper(ABC):
             return True
         except Exception:
             return False
-    
+
     def login(self):
         try:
             self.driver.get('https://google.com')
@@ -107,8 +107,7 @@ class Autobumper(ABC):
             if secret:
                 totp = pyotp.TOTP(secret)
                 time_remaining = totp.interval - datetime.datetime.now().timestamp() % totp.interval
-                if time_remaining <= 5:
-                    time.sleep(time_remaining+1)
+                time.sleep(time_remaining+1)
                 code = totp.now()
                 auth_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[3]/td/label/input'
                 self.wait.until(ec.visibility_of_element_located((By.XPATH, auth_xpath))).send_keys(code)
