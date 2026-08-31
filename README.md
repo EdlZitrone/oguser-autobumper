@@ -1,4 +1,4 @@
-# OGU Bumper (Working  08/2026)
+# OGU Bumper (Working  09/2026)
 A lightweight Autobumper and Awardfarmer (Events) for [oguser.com](https://oguser.com) written in Python with Selenium. It offers three [modes](#modes) to bump threads via profile, a link list, or an event thread. Since its latest release, OGU Bumper supports logging in with 2FA enabled.
 
 ## Preview:
@@ -61,4 +61,3 @@ python main.py
 Please leave a star on the repository if it is useful to you.  
 If you need any help with the script feel free to reach out.  
 Discord: [edlzitrone](https://discord.com/users/565016982768844800)    -    Telegram: [beamertaken](https://t.me/beamertaken) - OGU: [mf](https://oguser.com/mf)
-
