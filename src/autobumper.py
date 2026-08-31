@@ -104,7 +104,7 @@ class Autobumper(ABC):
             self.wait.until(ec.visibility_of_element_located((By.XPATH, user_xpath))).send_keys(username)
             pass_xpath = '//*[@id="fullcontainment"]/div/form[2]/table/tbody/tr[2]/td/label/input'
             self.wait.until(ec.visibility_of_element_located((By.XPATH, pass_xpath))).send_keys(password)
-            if secret:
+            if secret and secret != "enter your 2FA secret here":
                 totp = pyotp.TOTP(secret)
                 time_remaining = totp.interval - datetime.datetime.now().timestamp() % totp.interval
                 time.sleep(time_remaining+1)
